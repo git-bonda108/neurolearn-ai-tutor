@@ -44,3 +44,89 @@ model AgentMetric {
   @@index([sessionId])
   @@index([agentType])
 }
+
+model Note {
+  id          String    @id @default(cuid())
+  title       String
+  content     String    @db.Text
+  subject     String?
+  tags        String[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  concepts    Concept[]
+  flashcards  Flashcard[]
+}
+
+model Concept {
+  id              String               @id @default(cuid())
+  name            String
+  description     String?              @db.Text
+  subject         String?
+  noteId          String?
+  note            Note?                @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  createdAt       DateTime             @default(now())
+  relationsFrom   ConceptRelationship[] @relation("ConceptFrom")
+  relationsTo     ConceptRelationship[] @relation("ConceptTo")
+
+  @@index([noteId])
+  @@index([subject])
+}
+
+model ConceptRelationship {
+  id              String    @id @default(cuid())
+  fromConceptId   String
+  toConceptId     String
+  relationshipType String
+  strength        Float     @default(1.0)
+  fromConcept     Concept   @relation("ConceptFrom", fields: [fromConceptId], references: [id], onDelete: Cascade)
+  toConcept       Concept   @relation("ConceptTo", fields: [toConceptId], references: [id], onDelete: Cascade)
+  createdAt       DateTime  @default(now())
+
+  @@index([fromConceptId])
+  @@index([toConceptId])
+}
+
+model Flashcard {
+  id          String            @id @default(cuid())
+  front       String            @db.Text
+  back        String            @db.Text
+  subject     String?
+  difficulty  String            @default("medium")
+  noteId      String?
+  note        Note?             @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  createdAt   DateTime          @default(now())
+  reviews     FlashcardReview[]
+
+  @@index([noteId])
+  @@index([subject])
+}
+
+model FlashcardReview {
+  id            String    @id @default(cuid())
+  flashcardId   String
+  flashcard     Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+  quality       Int
+  easeFactor    Float
+  interval      Int
+  repetitions   Int
+  nextReviewAt  DateTime
+  reviewedAt    DateTime  @default(now())
+
+  @@index([flashcardId])
+  @@index([nextReviewAt])
+}
+
+model KnowledgePack {
+  id          String   @id @default(cuid())
+  title       String
+  subject     String
+  description String   @db.Text
+  content     Json
+  difficulty  String   @default("intermediate")
+  topics      String[]
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([subject])
+}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Home, MessageSquare, TrendingUp, Clock } from 'lucide-react';
+import { Home, MessageSquare, TrendingUp, Clock, BookOpen, Zap, Brain } from 'lucide-react';
 import { AgentAvatar } from '@/components/agent-avatar';
 import { AGENT_TYPES, type AgentType } from '@/lib/agent-types';
 import { motion } from 'framer-motion';
@@ -127,6 +127,39 @@ export default function DashboardPage() {
             <p className="text-3xl font-bold text-gray-100">{totalResponses}</p>
           </motion.div>
         </div>
+
+        {/* Quick Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          className="mb-8"
+        >
+          <h2 className="text-2xl font-bold text-gray-100 mb-4">Quick Actions</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            <Link href="/chat">
+              <div className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 border border-purple-500/50 hover:border-purple-400 p-6 rounded-2xl transition-all cursor-pointer group">
+                <MessageSquare className="w-10 h-10 mb-3 text-purple-400 group-hover:scale-110 transition-transform" />
+                <h3 className="text-lg font-semibold text-gray-100 mb-1">AI Tutor Chat</h3>
+                <p className="text-sm text-gray-400">Ask questions to specialized tutors</p>
+              </div>
+            </Link>
+            <Link href="/notes">
+              <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 border border-blue-500/50 hover:border-blue-400 p-6 rounded-2xl transition-all cursor-pointer group">
+                <BookOpen className="w-10 h-10 mb-3 text-blue-400 group-hover:scale-110 transition-transform" />
+                <h3 className="text-lg font-semibold text-gray-100 mb-1">Second Brain</h3>
+                <p className="text-sm text-gray-400">Build your knowledge repository</p>
+              </div>
+            </Link>
+            <Link href="/flashcards">
+              <div className="bg-gradient-to-br from-green-600/20 to-emerald-600/20 border border-green-500/50 hover:border-green-400 p-6 rounded-2xl transition-all cursor-pointer group">
+                <Zap className="w-10 h-10 mb-3 text-green-400 group-hover:scale-110 transition-transform" />
+                <h3 className="text-lg font-semibold text-gray-100 mb-1">Flashcards</h3>
+                <p className="text-sm text-gray-400">Review with spaced repetition</p>
+              </div>
+            </Link>
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
