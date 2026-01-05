@@ -1,0 +1,46 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/neurolearn_ai_tutor/nextjs_space/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model ChatSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  messages  Message[]
+  metrics   AgentMetric[]
+}
+
+model Message {
+  id            String      @id @default(cuid())
+  content       String      @db.Text
+  role          String
+  agentType     String?
+  modelUsed     String?
+  searchSources Json?
+  createdAt     DateTime    @default(now())
+  sessionId     String
+  session       ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+}
+
+model AgentMetric {
+  id                   String      @id @default(cuid())
+  agentType            String
+  questionsHandled     Int         @default(0)
+  averageResponseTime  Float?
+  successfulHandoffs   Int         @default(0)
+  sessionId            String
+  session              ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  createdAt            DateTime    @default(now())
+
+  @@index([sessionId])
+  @@index([agentType])
+}
