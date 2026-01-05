@@ -130,3 +130,80 @@ model KnowledgePack {
 
   @@index([subject])
 }
+
+model StudentProfile {
+  id              String   @id @default(cuid())
+  name            String
+  email           String?  @unique
+  avatar          String?
+  grade           String?
+  learningStyle   String   @default("visual")
+  interests       String[]
+  strengths       String[]
+  goals           String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  classes         ClassEnrollment[]
+  progress        LearningProgress[]
+}
+
+model Class {
+  id          String   @id @default(cuid())
+  title       String
+  subject     String
+  description String   @db.Text
+  imageUrl    String?
+  difficulty  String   @default("intermediate")
+  topics      String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  enrollments ClassEnrollment[]
+  modules     LearningModule[]
+
+  @@index([subject])
+}
+
+model ClassEnrollment {
+  id              String         @id @default(cuid())
+  studentId       String
+  classId         String
+  student         StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  class           Class          @relation(fields: [classId], references: [id], onDelete: Cascade)
+  enrolledAt      DateTime       @default(now())
+  completionRate  Float          @default(0)
+
+  @@index([studentId])
+  @@index([classId])
+  @@unique([studentId, classId])
+}
+
+model LearningModule {
+  id          String   @id @default(cuid())
+  title       String
+  classId     String
+  class       Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  content     String   @db.Text
+  orderIndex  Int
+  imageUrl    String?
+  resources   Json?
+  createdAt   DateTime @default(now())
+
+  @@index([classId])
+}
+
+model LearningProgress {
+  id              String         @id @default(cuid())
+  studentId       String
+  student         StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  itemType        String
+  itemId          String
+  status          String         @default("in_progress")
+  score           Float?
+  timeSpent       Int            @default(0)
+  completedAt     DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([studentId])
+  @@index([itemType, itemId])
+}
