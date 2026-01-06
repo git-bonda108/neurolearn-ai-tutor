@@ -188,15 +188,11 @@ export async function generateVisuals(
     if (section.imageCaption) {
       try {
         console.log(`Generating image ${i + 1}/${imagesToGenerate}...`);
-        const imageUrl = await generateEducationalImage(
-          section.imageCaption,
-          contextPack.subject,
-          'illustration'
-        );
-        if (imageUrl) {
+        const imageResult = await generateEducationalImage(section.imageCaption);
+        if (imageResult.url) {
           updatedSections[i] = {
             ...section,
-            imageUrl,
+            imageUrl: imageResult.url,
           };
           console.log(`✓ Image ${i + 1} generated successfully`);
         }

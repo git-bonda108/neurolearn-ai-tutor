@@ -12,16 +12,9 @@ export async function POST(req: Request) {
       );
     }
 
-    const imageUrl = await generateEducationalImage(concept, subject, style || 'illustration');
+    const result = await generateEducationalImage(`${concept} - ${subject} - ${style || 'illustration'}`);
 
-    if (!imageUrl) {
-      return NextResponse.json(
-        { error: 'Failed to generate image' },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({ imageUrl });
+    return NextResponse.json({ imageUrl: result.url, source: result.source });
   } catch (error) {
     console.error('Error in image generation:', error);
     return NextResponse.json(
