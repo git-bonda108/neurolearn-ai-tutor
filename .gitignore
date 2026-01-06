@@ -18,3 +18,5 @@ out
 .deploy
 .logs
 *.tsbuildinfo
+nextjs_space/node_modules
+node_modules
