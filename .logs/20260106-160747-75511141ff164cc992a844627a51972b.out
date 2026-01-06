@@ -1,0 +1,11 @@
+[master a71d688] Real persona images and new tagline
+ 12 files changed, 62 insertions(+), 16 deletions(-)
+ create mode 100644 nextjs_space/public/personas/aristotle.jpg
+ create mode 100644 nextjs_space/public/personas/curie.png
+ create mode 100644 nextjs_space/public/personas/darwin.jpg
+ create mode 100644 nextjs_space/public/personas/einstein.jpg
+ create mode 100644 nextjs_space/public/personas/hypatia.jpg
+ create mode 100644 nextjs_space/public/personas/newton.jpg
+ create mode 100644 nextjs_space/public/personas/tesla.jpg
+ create mode 100644 nextjs_space/public/personas/turing.jpg
+###a71d68882b39725f2b0c26cdef38890f1b783fbd###

@@ -1,0 +1,46 @@
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+  ▲ Next.js 14.2.28
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/11) ...
+   Generating static pages (2/11) 
+   Generating static pages (5/11) 
+   Generating static pages (8/11) 
+ ✓ Generating static pages (11/11)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ƒ /                                    175 B          96.2 kB
+├ ƒ /_not-found                          873 B          88.2 kB
+├ ƒ /api/chat                            0 B                0 B
+├ ƒ /api/flashcards                      0 B                0 B
+├ ƒ /api/flashcards/generate             0 B                0 B
+├ ƒ /api/flashcards/review               0 B                0 B
+├ ƒ /api/notes                           0 B                0 B
+├ ƒ /api/notes/[noteId]                  0 B                0 B
+├ ƒ /api/sessions                        0 B                0 B
+├ ƒ /api/sessions/[sessionId]            0 B                0 B
+├ ƒ /chat                                38.4 kB         167 kB
+├ ƒ /dashboard                           3.91 kB         133 kB
+├ ƒ /flashcards                          5.53 kB         167 kB
+└ ƒ /notes                               6.19 kB         167 kB
++ First Load JS shared by all            87.3 kB
+  ├ chunks/117-faf9e44243606502.js       31.6 kB
+  ├ chunks/fd9d1056-6922f449a204c2cc.js  53.6 kB
+  └ other shared chunks (total)          2.1 kB
+
+
+ƒ  (Dynamic)  server-rendered on demand
+
+Successfully built app artifact

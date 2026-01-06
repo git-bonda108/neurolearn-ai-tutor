@@ -1,0 +1,34 @@
+  ▲ Next.js 14.2.28
+  - Local:        http://localhost:3000
+  - Environments: .env
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+ ✓ Starting...
+ ✓ Ready in 1760ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.6s (1122 modules)
+ GET / 200 in 2831ms
+ ✓ Compiled in 425ms (558 modules)
+ GET / 200 in 57ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 2.9s (2295 modules)
+ GET /notes 200 in 3675ms
+ GET /flashcards 200 in 3679ms
+ GET /dashboard 200 in 3690ms
+ GET /teach 200 in 3691ms
+ GET /chat 200 in 3708ms
+ ○ Compiling /api/students ...
+ ✓ Compiled /api/students in 524ms (1182 modules)
+ ✓ Compiled (1301 modules)
+ GET /api/teach/topics 200 in 1057ms
+ GET /api/teach/topics 200 in 33ms
+ GET /api/students 200 in 1204ms
+ GET /api/notes 200 in 1274ms
+ GET /api/sessions 200 in 1273ms
+ GET /api/flashcards 200 in 1285ms
+ GET /api/notes 200 in 37ms
+ GET /api/sessions 200 in 46ms
+ GET /api/flashcards 200 in 46ms
+ GET /api/students 200 in 46ms
+[?25h

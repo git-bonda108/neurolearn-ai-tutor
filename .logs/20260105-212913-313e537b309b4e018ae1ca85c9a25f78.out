@@ -1,0 +1,10 @@
+[master e753670] Second Brain notes system with AI concept extraction and spaced repetition flashcards
+ 11 files changed, 1483 insertions(+), 2 deletions(-)
+ create mode 100644 nextjs_space/app/api/flashcards/generate/route.ts
+ create mode 100644 nextjs_space/app/api/flashcards/review/route.ts
+ create mode 100644 nextjs_space/app/api/flashcards/route.ts
+ create mode 100644 nextjs_space/app/api/notes/[noteId]/route.ts
+ create mode 100644 nextjs_space/app/api/notes/route.ts
+ create mode 100644 nextjs_space/app/flashcards/page.tsx
+ create mode 100644 nextjs_space/app/notes/page.tsx
+###e75367087e404c938f5401b1f54409a343a0dc11###

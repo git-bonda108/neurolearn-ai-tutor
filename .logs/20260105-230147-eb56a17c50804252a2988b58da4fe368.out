@@ -1,0 +1,54 @@
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+  ▲ Next.js 14.2.28
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/17) ...
+   Generating static pages (4/17) 
+   Generating static pages (8/17) 
+   Generating static pages (12/17) 
+ ✓ Generating static pages (17/17)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ƒ /                                    175 B          96.2 kB
+├ ƒ /_not-found                          873 B          88.2 kB
+├ ƒ /api/chat                            0 B                0 B
+├ ƒ /api/classes                         0 B                0 B
+├ ƒ /api/flashcards                      0 B                0 B
+├ ƒ /api/flashcards/generate             0 B                0 B
+├ ƒ /api/flashcards/review               0 B                0 B
+├ ƒ /api/images/generate                 0 B                0 B
+├ ƒ /api/notes                           0 B                0 B
+├ ƒ /api/notes/[noteId]                  0 B                0 B
+├ ƒ /api/sessions                        0 B                0 B
+├ ƒ /api/sessions/[sessionId]            0 B                0 B
+├ ƒ /api/students                        0 B                0 B
+├ ƒ /api/teach/generate                  0 B                0 B
+├ ○ /api/teach/topics                    0 B                0 B
+├ ƒ /chat                                39.4 kB         168 kB
+├ ƒ /dashboard                           5.19 kB         134 kB
+├ ƒ /flashcards                          7.38 kB         167 kB
+├ ƒ /knowledge-graph                     4.34 kB         187 kB
+├ ƒ /notes                               8 kB            168 kB
+└ ƒ /teach                               11.4 kB         217 kB
++ First Load JS shared by all            87.3 kB
+  ├ chunks/117-6e4a422c2a6cfbf2.js       31.6 kB
+  ├ chunks/fd9d1056-566e4a218e6051f1.js  53.6 kB
+  └ other shared chunks (total)          2.1 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+Successfully built app artifact

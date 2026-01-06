@@ -1,0 +1,95 @@
+➤ YN0000: · Yarn 4.12.0
+➤ YN0000: ┌ Resolution step
+➤ YN0085: │ + openai@npm:6.15.0, react-markdown@npm:10.1.0, react-quill@npm:2.0.0, reactflow@npm:11.11.4, @reactflow/background@npm:11.3.14, and 122 more.
+➤ YN0000: └ Completed in 0s 568ms
+➤ YN0000: ┌ Post-resolution validation
+➤ YN0060: │ @typescript-eslint/parser is listed by your project with version 7.0.0 (p6cb6c0), which doesn't satisfy what @typescript-eslint/eslint-plugin requests (^6.0.0-alpha).
+➤ YN0060: │ eslint is listed by your project with version 9.24.0 (pe6e000), which doesn't satisfy what @typescript-eslint/eslint-plugin and other dependencies request (^8.57.0).
+➤ YN0060: │ zod is listed by your project with version 3.23.8 (p1aa16e), which doesn't satisfy what openai requests (^3.25.0 || ^4.0.0).
+➤ YN0002: │ app@workspace:. doesn't provide prettier (pd88b5f), requested by eslint-plugin-prettier.
+➤ YN0086: │ Some peer dependencies are incorrectly met by your project; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code.
+➤ YN0086: │ Some peer dependencies are incorrectly met by dependencies; run yarn explain peer-requirements for details.
+➤ YN0000: └ Completed
+➤ YN0000: ┌ Fetch step
+➤ YN0013: │ 126 packages were added to the project (+ 16.21 MiB).
+➤ YN0000: └ Completed in 1s 280ms
+➤ YN0000: ┌ Link step
+➤ YN0000: └ Completed in 1s 370ms
+➤ YN0000: · Done with warnings in 3s 385ms
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+
+✔ Generated Prisma Client (v6.7.0) to ./node_modules/.prisma/client in 115ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Help us improve the Prisma ORM for everyone. Share your feedback in a short 2-min survey: https://pris.ly/orm/survey/release-5-22
+
+Starting server...
+  ▲ Next.js 14.2.28
+  - Local:        http://localhost:3000
+  - Environments: .env
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+ ✓ Starting...
+ ✓ Ready in 1453ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1475ms (510 modules)
+ HEAD / 200 in 1795ms
+ ✓ Compiled in 351ms (253 modules)
+ GET / 200 in 141ms
+ ○ Compiling /chat ...
+ ✓ Compiled /chat in 1629ms (1463 modules)
+ GET /chat 200 in 106ms
+ ✓ Compiled /api/chat in 250ms (778 modules)
+ POST /api/chat 500 in 606ms
+ GET / 200 in 73ms
+ POST /api/chat 500 in 163ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 576ms (1517 modules)
+ ✓ Compiled /api/sessions in 255ms (791 modules)
+ GET /api/sessions 200 in 321ms
+ GET /api/sessions 200 in 26ms
+ GET / 200 in 77ms
+ GET / 200 in 37ms
+ GET / 200 in 38ms
+ GET / 200 in 95ms
+ GET / 200 in 41ms
+ GET / 200 in 49ms
+ GET / 200 in 49ms
+ GET / 200 in 38ms
+   Reload env: .env
+ ✓ Compiled in 449ms (1472 modules)
+ GET / 200 in 140ms
+ GET / 200 in 36ms
+ ✓ Compiled /api/chat in 197ms (778 modules)
+ GET / 200 in 66ms
+ POST /api/chat 200 in 26215ms
+ GET / 200 in 37ms
+ GET / 200 in 42ms
+ ○ Compiling /teach ...
+ ✓ Compiled /teach in 1829ms (1837 modules)
+ GET /teach 200 in 2062ms
+ ✓ Compiled /api/students in 419ms (859 modules)
+ ✓ Compiled (864 modules)
+ GET /api/teach/topics 200 in 687ms
+ GET /api/teach/topics 200 in 19ms
+ GET /api/students 200 in 711ms
+ GET /api/students 200 in 21ms
+ ✓ Compiled /_not-found in 323ms (1845 modules)
+ GET /_next/static/chunks/handle-smooth-scroll.js.map 404 in 287ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 431ms
+ GET /_next/static/chunks/app/teach/bundle-mjs.mjs.map 404 in 289ms
+ GET /_next/static/chunks/static-generation-async-storage-instance.js.map 404 in 289ms
+ ○ Compiling /api/teach/generate ...
+ ✓ Compiled /api/teach/generate in 551ms (960 modules)
+🎓 Generating lesson: photosynthesis for Student (Grade 8)
+🎓 Teaching Orchestrator: Generating lesson on "Photosynthesis" for Grade 8
+📊 Agent 1: Analyzing context...
+✍️ Agent 2: Generating lesson content...
+🎨 Agent 3: Creating visual materials...
+🎥 Agent 4: Curating educational videos...
+🌍 Agent 5: Finding real-world connections...
+📝 Agent 6: Building assessment...
+[?25h

@@ -1,0 +1,5 @@
+app/api/images/generate/route.ts(15,62): error TS2554: Expected 1 arguments, but got 3.
+lib/image-generator.ts(29,17): error TS18048: 'response.data' is possibly 'undefined'.
+lib/teaching-agents.ts(193,11): error TS2554: Expected 1 arguments, but got 3.
+lib/teaching-agents.ts(199,13): error TS2322: Type 'ImageResult' is not assignable to type 'string'.
+exit_code=2

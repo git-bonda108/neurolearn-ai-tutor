@@ -1,0 +1,7 @@
+app/api/chat/route.ts(178,13): error TS2322: Type '{ content: string; role: string; agentType: AgentType; modelUsed: ModelType; searchSources: any; sessionId: string | undefined; }' is not assignable to type '(Without<MessageCreateInput, MessageUncheckedCreateInput> & MessageUncheckedCreateInput) | (Without<...> & MessageCreateInput)'.
+  Type '{ content: string; role: string; agentType: AgentType; modelUsed: ModelType; searchSources: any; sessionId: string | undefined; }' is not assignable to type 'Without<MessageUncheckedCreateInput, MessageCreateInput> & MessageCreateInput'.
+    Type '{ content: string; role: string; agentType: AgentType; modelUsed: ModelType; searchSources: any; sessionId: string | undefined; }' is not assignable to type 'Without<MessageUncheckedCreateInput, MessageCreateInput>'.
+      Types of property 'sessionId' are incompatible.
+        Type 'string | undefined' is not assignable to type 'undefined'.
+          Type 'string' is not assignable to type 'undefined'.
+exit_code=2

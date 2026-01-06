@@ -1,0 +1,50 @@
+  ▲ Next.js 14.2.28
+  - Environments: .env
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/17) ...
+   Generating static pages (4/17) 
+   Generating static pages (8/17) 
+   Generating static pages (12/17) 
+ ✓ Generating static pages (17/17)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    5.34 kB         134 kB
+├ ○ /_not-found                          872 B          88.3 kB
+├ ƒ /api/chat                            0 B                0 B
+├ ƒ /api/classes                         0 B                0 B
+├ ƒ /api/flashcards                      0 B                0 B
+├ ƒ /api/flashcards/generate             0 B                0 B
+├ ƒ /api/flashcards/review               0 B                0 B
+├ ƒ /api/images/generate                 0 B                0 B
+├ ƒ /api/notes                           0 B                0 B
+├ ƒ /api/notes/[noteId]                  0 B                0 B
+├ ƒ /api/sessions                        0 B                0 B
+├ ƒ /api/sessions/[sessionId]            0 B                0 B
+├ ƒ /api/students                        0 B                0 B
+├ ƒ /api/teach/generate                  0 B                0 B
+├ ○ /api/teach/topics                    0 B                0 B
+├ ○ /chat                                41.7 kB         171 kB
+├ ○ /dashboard                           5.19 kB         134 kB
+├ ○ /flashcards                          7.38 kB         168 kB
+├ ○ /knowledge-graph                     4.34 kB         187 kB
+├ ○ /notes                               8 kB            168 kB
+└ ○ /teach                               11.4 kB         217 kB
++ First Load JS shared by all            87.4 kB
+  ├ chunks/156-fc0eed4c02c46d66.js       31.7 kB
+  ├ chunks/ceb5afef-bde1ced7bed04c5f.js  53.6 kB
+  └ other shared chunks (total)          2.11 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+exit_code=0

@@ -1,0 +1,55 @@
+➤ YN0000: · Yarn 4.12.0
+➤ YN0000: ┌ Resolution step
+➤ YN0085: │ + react-markdown@npm:10.1.0, @types/debug@npm:4.1.12, @types/estree-jsx@npm:1.0.5, @types/hast@npm:3.0.4, @types/mdast@npm:4.0.4, @types/ms@npm:2.1.0, and 73 more.
+➤ YN0000: └ Completed in 0s 469ms
+➤ YN0000: ┌ Post-resolution validation
+➤ YN0060: │ @typescript-eslint/parser is listed by your project with version 7.0.0 (p6cb6c0), which doesn't satisfy what @typescript-eslint/eslint-plugin requests (^6.0.0-alpha).
+➤ YN0060: │ eslint is listed by your project with version 9.24.0 (pe6e000), which doesn't satisfy what @typescript-eslint/eslint-plugin and other dependencies request (^8.57.0).
+➤ YN0002: │ app@workspace:. doesn't provide prettier (pd88b5f), requested by eslint-plugin-prettier.
+➤ YN0086: │ Some peer dependencies are incorrectly met by your project; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code.
+➤ YN0086: │ Some peer dependencies are incorrectly met by dependencies; run yarn explain peer-requirements for details.
+➤ YN0000: └ Completed
+➤ YN0000: ┌ Fetch step
+➤ YN0013: │ 78 packages were added to the project (+ 2.76 MiB).
+➤ YN0000: └ Completed in 1s 89ms
+➤ YN0000: ┌ Link step
+➤ YN0000: └ Completed in 0s 442ms
+➤ YN0000: · Done with warnings in 2s 163ms
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+
+✔ Generated Prisma Client (v6.7.0) to ./node_modules/.prisma/client in 72ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Easily identify and fix slow SQL queries in your app. Optimize helps you enhance your visibility: https://pris.ly/--optimize
+
+Starting server...
+  ▲ Next.js 14.2.28
+  - Local:        http://localhost:3000
+  - Environments: .env
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+ ✓ Starting...
+ ✓ Ready in 1376ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1513ms (510 modules)
+ HEAD / 200 in 1706ms
+ ✓ Compiled in 329ms (253 modules)
+ GET / 200 in 42ms
+ ○ Compiling /chat ...
+ ✓ Compiled /chat in 2s (1463 modules)
+ GET /chat 200 in 97ms
+ ✓ Compiled /api/chat in 287ms (778 modules)
+ POST /api/chat 200 in 11521ms
+ GET / 200 in 65ms
+ GET / 200 in 29ms
+ GET / 200 in 32ms
+ ✓ Compiled in 676ms (731 modules)
+ ✓ Compiled in 639ms (731 modules)
+ ✓ Compiled in 508ms (731 modules)
+ ✓ Compiled in 278ms (731 modules)
+ ✓ Compiled in 263ms (731 modules)
+ ✓ Compiled in 322ms (731 modules)
+[?25h

@@ -1,0 +1,8 @@
+[master 686887c] Complete AI Teaching System with 6-agent orchestration, adaptive lessons, DALL-E images, videos, real-world connections
+ 7 files changed, 1324 insertions(+), 13 deletions(-)
+ create mode 100644 nextjs_space/app/api/teach/generate/route.ts
+ create mode 100644 nextjs_space/app/api/teach/topics/route.ts
+ create mode 100644 nextjs_space/app/teach/page.tsx
+ create mode 100644 nextjs_space/lib/context-packs.ts
+ create mode 100644 nextjs_space/lib/teaching-agents.ts
+###686887c849870d9b3f7719ab662d62c927f0572e###

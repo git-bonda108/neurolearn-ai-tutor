@@ -1,0 +1,9 @@
+[master 6c9ada9] Full EdTech platform with character personas, DALL-E images, knowledge graph, and student profiles
+ 10 files changed, 619 insertions(+), 16 deletions(-)
+ create mode 100644 nextjs_space/app/api/classes/route.ts
+ create mode 100644 nextjs_space/app/api/images/generate/route.ts
+ create mode 100644 nextjs_space/app/api/students/route.ts
+ create mode 100644 nextjs_space/app/knowledge-graph/page.tsx
+ create mode 100644 nextjs_space/lib/image-generator.ts
+ create mode 100644 nextjs_space/lib/seed-data.ts
+###6c9ada9d394c8b6843b891569e364877d92890cc###
