@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, Home, BarChart3, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MessageBubble } from '@/components/message-bubble';
 import { AgentIndicator } from '@/components/agent-indicator';
 import { ModelToggle } from '@/components/model-toggle';
@@ -187,8 +188,14 @@ export default function ChatPage() {
                   }`}
                 >
                   <div className="flex items-center gap-3 p-3">
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center text-lg font-bold text-white shadow-lg`}>
-                      {persona.avatar}
+                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center text-lg font-bold text-white shadow-lg overflow-hidden`}>
+                      <Image
+                        src={persona.image}
+                        alt={persona.name}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="text-left">
                       <p className="text-sm font-semibold text-white">{persona.name}</p>
@@ -239,8 +246,14 @@ export default function ChatPage() {
                   </>
                 ) : (
                   <>
-                    <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br ${selectedPersona.color} text-4xl font-bold text-white mb-6 shadow-2xl`}>
-                      {selectedPersona.avatar}
+                    <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br ${selectedPersona.color} text-4xl font-bold text-white mb-6 shadow-2xl overflow-hidden`}>
+                      <Image
+                        src={selectedPersona.image}
+                        alt={selectedPersona.name}
+                        width={96}
+                        height={96}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <h2 className="text-3xl font-bold text-gray-100 mb-4">
                       Chat with {selectedPersona.name}

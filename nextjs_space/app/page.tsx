@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Brain, Sparkles, BookOpen, CreditCard, GraduationCap } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Brain, Sparkles, BookOpen, CreditCard, GraduationCap, Cpu, Network, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { PERSONAS } from "@/lib/personas";
 import { useState } from "react";
@@ -37,19 +38,30 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <h2 className="mb-6 text-4xl sm:text-5xl lg:text-6xl font-bold">
-                Learn{" "}
+              <h2 className="mb-6 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
                 <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  10x Faster
+                  Context-Driven
                 </span>
                 <br />
-                with AI
+                Personalized Education
               </h2>
+              
+              <div className="flex flex-wrap gap-3 mb-6 justify-center lg:justify-start">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-500/20 text-purple-300 text-sm border border-purple-500/30">
+                  <Network className="w-4 h-4" /> Multi-Agent Orchestration
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/20 text-blue-300 text-sm border border-blue-500/30">
+                  <Cpu className="w-4 h-4" /> MCP Architecture
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-pink-500/20 text-pink-300 text-sm border border-pink-500/30">
+                  <Zap className="w-4 h-4" /> Adaptive Learning
+                </span>
+              </div>
 
               <p className="mb-8 text-lg text-gray-300 max-w-xl mx-auto lg:mx-0">
                 Chat with legendary minds like Einstein, Newton, and Marie Curie. 
-                Your personal Second Brain with AI-powered lessons, smart notes, 
-                and spaced repetition flashcards.
+                Powered by 6-agent orchestration system with intelligent routing, 
+                real-time web search, and personalized content generation.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -81,8 +93,14 @@ export default function HomePage() {
                 {/* Persona Avatar */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-900/50 via-pink-900/30 to-blue-900/50 backdrop-blur-xl border border-white/10" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                  <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${PERSONAS[selectedPersona].color} flex items-center justify-center text-4xl font-bold text-white mb-4 shadow-2xl`}>
-                    {PERSONAS[selectedPersona].avatar}
+                  <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${PERSONAS[selectedPersona].color} flex items-center justify-center text-4xl font-bold text-white mb-4 shadow-2xl overflow-hidden`}>
+                    <Image
+                      src={PERSONAS[selectedPersona].image}
+                      alt={PERSONAS[selectedPersona].name}
+                      width={128}
+                      height={128}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h3 className="text-2xl font-bold mb-2 text-center">{PERSONAS[selectedPersona].name}</h3>
                   <p className="text-purple-300 mb-2 text-center">{PERSONAS[selectedPersona].title}</p>
@@ -143,8 +161,14 @@ export default function HomePage() {
                   <div className="relative aspect-square rounded-2xl bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 hover:border-purple-500 transition-all overflow-hidden">
                     <div className={`absolute inset-0 bg-gradient-to-br ${persona.color} opacity-10 group-hover:opacity-20 transition-opacity`} />
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-3">
-                      <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center text-xl font-bold text-white mb-2 shadow-lg group-hover:scale-110 transition-transform`}>
-                        {persona.avatar}
+                      <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center text-xl font-bold text-white mb-2 shadow-lg group-hover:scale-110 transition-transform overflow-hidden`}>
+                        <Image
+                          src={persona.image}
+                          alt={persona.name}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <p className="text-xs font-semibold text-center text-white">{persona.name.split(" ")[0]}</p>
                       <p className="text-[10px] text-gray-400 text-center">{persona.subject.split("&")[0].trim()}</p>

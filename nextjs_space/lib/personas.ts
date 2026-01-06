@@ -10,6 +10,7 @@ export interface Persona {
   teachingStyle: string;
   quote: string;
   avatar: string; // Avatar initials or emoji
+  image: string; // Real image URL
   color: string; // Gradient color
 }
 
@@ -24,6 +25,7 @@ export const PERSONAS: Persona[] = [
     teachingStyle: "Uses visual metaphors and encourages questioning everything. Believes imagination is more important than knowledge.",
     quote: "The important thing is not to stop questioning. Curiosity has its own reason for existing.",
     avatar: "AE",
+    image: "https://cdn.abacus.ai/images/c6e83bd9-f13c-4d50-ad04-7d50d9aac31c.png",
     color: "from-blue-500 to-cyan-400",
   },
   {
@@ -36,6 +38,7 @@ export const PERSONAS: Persona[] = [
     teachingStyle: "Emphasizes mathematical foundations and logical reasoning. Builds concepts step-by-step from first principles.",
     quote: "If I have seen further, it is by standing on the shoulders of giants.",
     avatar: "IN",
+    image: "https://cdn.abacus.ai/images/8427bb5d-a829-464a-b111-ec550a789aaf.png",
     color: "from-indigo-500 to-purple-400",
   },
   {
@@ -48,6 +51,7 @@ export const PERSONAS: Persona[] = [
     teachingStyle: "Focuses on experimental design and observation. Inspires students to pursue their passions despite obstacles.",
     quote: "Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.",
     avatar: "MC",
+    image: "https://cdn.abacus.ai/images/b30c51ce-47b0-467f-93b0-090f5d4e9406.png",
     color: "from-pink-500 to-rose-400",
   },
   {
@@ -60,6 +64,7 @@ export const PERSONAS: Persona[] = [
     teachingStyle: "Uses logic puzzles and code-breaking challenges. Encourages thinking about what machines can and cannot do.",
     quote: "We can only see a short distance ahead, but we can see plenty there that needs to be done.",
     avatar: "AT",
+    image: "https://cdn.abacus.ai/images/26342dfa-682e-41b7-bba6-685c03037cbe.png",
     color: "from-green-500 to-emerald-400",
   },
   {
@@ -72,6 +77,7 @@ export const PERSONAS: Persona[] = [
     teachingStyle: "Uses real-world examples from nature. Encourages observation and pattern recognition in biological systems.",
     quote: "It is not the strongest of the species that survives, nor the most intelligent, but the one most responsive to change.",
     avatar: "CD",
+    image: "https://cdn.abacus.ai/images/9fd1d494-02fc-4874-b533-2a18936947ce.png",
     color: "from-green-600 to-teal-400",
   },
   {
@@ -84,6 +90,7 @@ export const PERSONAS: Persona[] = [
     teachingStyle: "Uses Socratic questioning and logical reasoning. Teaches through dialogue and systematic analysis.",
     quote: "It is the mark of an educated mind to be able to entertain a thought without accepting it.",
     avatar: "AR",
+    image: "https://cdn.abacus.ai/images/a0c73878-946e-4f54-b9f4-57bcaad1a7ab.png",
     color: "from-amber-500 to-orange-400",
   },
   {
@@ -96,6 +103,7 @@ export const PERSONAS: Persona[] = [
     teachingStyle: "Demonstrates concepts through inventions and visualizations. Encourages bold, futuristic thinking.",
     quote: "The present is theirs; the future, for which I really worked, is mine.",
     avatar: "NT",
+    image: "https://cdn.abacus.ai/images/acf0e145-e46e-4769-88ba-12e2abbad2d1.png",
     color: "from-violet-500 to-purple-400",
   },
   {
@@ -108,6 +116,7 @@ export const PERSONAS: Persona[] = [
     teachingStyle: "Combines mathematical rigor with philosophical inquiry. Encourages students to question and explore.",
     quote: "Reserve your right to think, for even to think wrongly is better than not to think at all.",
     avatar: "HY",
+    image: "https://cdn.abacus.ai/images/f7009440-4669-47d6-946e-897f2a9f0d9f.png",
     color: "from-fuchsia-500 to-pink-400",
   },
 ];
