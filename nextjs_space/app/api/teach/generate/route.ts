@@ -3,6 +3,9 @@ import { generateAdaptiveLesson } from '@/lib/teaching-agents';
 import { getContextPack } from '@/lib/context-packs';
 import { prisma } from '@/lib/db';
 
+// Increase timeout to 5 minutes for AI generation
+export const maxDuration = 300; // 300 seconds = 5 minutes
+
 export async function POST(req: Request) {
   try {
     const { topic, studentId } = await req.json();

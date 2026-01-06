@@ -172,18 +172,22 @@ Make it engaging, clear, and memorable!`;
   }
 }
 
-// Agent 3: Visual Designer
+// Agent 3: Visual Designer - OPTIMIZED with fewer images
 export async function generateVisuals(
   sections: LessonSection[],
   contextPack: ContextPack
 ): Promise<LessonSection[]> {
   const updatedSections = [...sections];
   
-  // Generate images for first 3 sections (to stay within limits)
-  for (let i = 0; i < Math.min(3, sections.length); i++) {
+  // Generate images for first 2 sections only (faster + stays within limits)
+  const imagesToGenerate = Math.min(2, sections.length);
+  console.log(`Generating ${imagesToGenerate} DALL-E images...`);
+  
+  for (let i = 0; i < imagesToGenerate; i++) {
     const section = sections[i];
     if (section.imageCaption) {
       try {
+        console.log(`Generating image ${i + 1}/${imagesToGenerate}...`);
         const imageUrl = await generateEducationalImage(
           section.imageCaption,
           contextPack.subject,
@@ -194,9 +198,11 @@ export async function generateVisuals(
             ...section,
             imageUrl,
           };
+          console.log(`✓ Image ${i + 1} generated successfully`);
         }
       } catch (error) {
-        console.error(`Failed to generate image for section ${i}:`, error);
+        console.error(`✗ Failed to generate image for section ${i}:`, error);
+        // Continue without this image
       }
     }
   }
@@ -316,48 +322,89 @@ Make questions engaging and test real understanding!`;
   return { quiz, mindMap: { nodes, edges } };
 }
 
-// Main Teaching Orchestrator
+// Main Teaching Orchestrator - OPTIMIZED with parallel execution
 export async function generateAdaptiveLesson(
   contextPack: ContextPack,
   student: StudentProfile
 ): Promise<GeneratedLesson> {
   console.log(`🎓 Teaching Orchestrator: Generating lesson on "${contextPack.topic}" for Grade ${student.grade}`);
   
-  // Agent 1: Analyze Context
-  console.log('📊 Agent 1: Analyzing context...');
-  const { gradeContent, adaptations } = await analyzeContext(contextPack, student);
-  
-  // Agent 2: Generate Content
-  console.log('✍️ Agent 2: Generating lesson content...');
-  const sections = await generateLessonContent(contextPack, gradeContent, student, adaptations);
-  
-  // Agent 3: Generate Visuals
-  console.log('🎨 Agent 3: Creating visual materials...');
-  const sectionsWithImages = await generateVisuals(sections, contextPack);
-  
-  // Agent 4: Curate Videos
-  console.log('🎥 Agent 4: Curating educational videos...');
-  const videos = await curateVideos(contextPack.topic, student.grade);
-  
-  // Agent 5: Connect Real World
-  console.log('🌍 Agent 5: Finding real-world connections...');
-  const realWorld = await connectRealWorld(contextPack.topic, contextPack.realWorldLinks);
-  
-  // Agent 6: Build Assessment
-  console.log('📝 Agent 6: Building assessment...');
-  const { quiz, mindMap } = await buildAssessment(contextPack, gradeContent);
-  
-  console.log('✅ Lesson generation complete!');
-  
-  return {
-    topic: contextPack.topic,
-    gradeLevel: student.grade,
-    sections: sectionsWithImages,
-    videos,
-    realWorld,
-    quiz,
-    mindMap,
-    nextTopics: contextPack.relatedTopics,
-    estimatedTime: sections.length * 8, // ~8 min per section
-  };
+  try {
+    // Agent 1: Analyze Context (fast, local)
+    console.log('📊 Agent 1: Analyzing context...');
+    const { gradeContent, adaptations } = await analyzeContext(contextPack, student);
+    
+    // Agent 2: Generate Content (must happen first, needed for other agents)
+    console.log('✍️ Agent 2: Generating lesson content...');
+    const sections = await generateLessonContent(contextPack, gradeContent, student, adaptations);
+    
+    // Run Agents 3, 4, 5, 6 IN PARALLEL to save time!
+    console.log('🚀 Running remaining agents in parallel...');
+    
+    const [sectionsWithImages, videos, realWorld, assessment] = await Promise.all([
+      // Agent 3: Generate Visuals (DALL-E) - reduced to 2 images max
+      (async () => {
+        try {
+          console.log('🎨 Agent 3: Creating visual materials...');
+          return await generateVisuals(sections, contextPack);
+        } catch (error) {
+          console.error('Agent 3 error (continuing without images):', error);
+          return sections; // Return sections without images if DALL-E fails
+        }
+      })(),
+      
+      // Agent 4: Curate Videos (Tavily)
+      (async () => {
+        try {
+          console.log('🎥 Agent 4: Curating educational videos...');
+          return await curateVideos(contextPack.topic, student.grade);
+        } catch (error) {
+          console.error('Agent 4 error (continuing without videos):', error);
+          return [];
+        }
+      })(),
+      
+      // Agent 5: Connect Real World (Tavily)
+      (async () => {
+        try {
+          console.log('🌍 Agent 5: Finding real-world connections...');
+          return await connectRealWorld(contextPack.topic, contextPack.realWorldLinks);
+        } catch (error) {
+          console.error('Agent 5 error (continuing without real-world):', error);
+          return [];
+        }
+      })(),
+      
+      // Agent 6: Build Assessment (GPT-4)
+      (async () => {
+        try {
+          console.log('📝 Agent 6: Building assessment...');
+          return await buildAssessment(contextPack, gradeContent);
+        } catch (error) {
+          console.error('Agent 6 error (continuing with basic quiz):', error);
+          return {
+            quiz: [],
+            mindMap: { nodes: [{ id: 'main', label: contextPack.topic, type: 'main' as const }], edges: [] }
+          };
+        }
+      })(),
+    ]);
+    
+    console.log('✅ Lesson generation complete!');
+    
+    return {
+      topic: contextPack.topic,
+      gradeLevel: student.grade,
+      sections: sectionsWithImages,
+      videos,
+      realWorld,
+      quiz: assessment.quiz,
+      mindMap: assessment.mindMap,
+      nextTopics: contextPack.relatedTopics,
+      estimatedTime: sections.length * 8, // ~8 min per section
+    };
+  } catch (error) {
+    console.error('Critical error in lesson generation:', error);
+    throw error;
+  }
 }
