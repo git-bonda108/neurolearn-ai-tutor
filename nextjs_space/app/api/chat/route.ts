@@ -3,6 +3,7 @@ import { prisma } from '@/lib/db';
 import { routeQuestion, detectWebSearchNeed } from '@/lib/agent-router';
 import { AGENT_CONFIGS, MODEL_TYPES, type AgentType, type ModelType } from '@/lib/agent-types';
 import { searchWeb, formatSearchSources, type TavilySearchResult } from '@/lib/tavily-search';
+import { getPersona, getPersonaSystemPrompt } from '@/lib/personas';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,12 +16,13 @@ interface ChatRequest {
   messages: ChatMessage[];
   sessionId?: string;
   modelType?: ModelType;
+  personaId?: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request?.json() as ChatRequest;
-    const { messages = [], sessionId, modelType = MODEL_TYPES.OPENAI } = body;
+    const { messages = [], sessionId, modelType = MODEL_TYPES.OPENAI, personaId } = body;
 
     if (!messages || messages.length === 0) {
       return NextResponse.json({ error: 'No messages provided' }, { status: 400 });
@@ -44,6 +46,9 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Check if persona is selected
+    const persona = personaId ? getPersona(personaId) : null;
+    
     const routedAgent = routeQuestion(userMessage);
     const agentConfig = AGENT_CONFIGS[routedAgent];
     const needsSearch = detectWebSearchNeed(userMessage);
@@ -59,7 +64,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const systemMessage = agentConfig?.systemPrompt ?? '';
+    // Use persona system prompt if persona is selected, otherwise use agent config
+    const systemMessage = persona 
+      ? getPersonaSystemPrompt(persona)
+      : agentConfig?.systemPrompt ?? '';
     const enhancedUserMessage = userMessage + searchContext;
 
     const apiMessages = [

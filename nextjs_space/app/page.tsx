@@ -1,164 +1,352 @@
-import Link from 'next/link';
-import { ArrowRight, Brain, Users, Zap, BookOpen, Code, FlaskConical, Clock } from 'lucide-react';
-import { AGENT_CONFIGS, AGENT_TYPES } from '@/lib/agent-types';
+"use client";
+
+import Link from "next/link";
+import { ArrowRight, Brain, Sparkles, BookOpen, CreditCard, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
+import { PERSONAS } from "@/lib/personas";
+import { useState } from "react";
 
 export default function HomePage() {
-  const agents = [
-    AGENT_CONFIGS[AGENT_TYPES.MATH],
-    AGENT_CONFIGS[AGENT_TYPES.SCIENCE],
-    AGENT_CONFIGS[AGENT_TYPES.HISTORY],
-    AGENT_CONFIGS[AGENT_TYPES.PROGRAMMING],
-  ];
+  const [selectedPersona, setSelectedPersona] = useState(0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <header className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 mb-6">
-            <Brain className="w-12 h-12 text-purple-500" />
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-              NeuroLearn
-            </h1>
-          </div>
-          <p className="text-2xl text-gray-300 mb-4 max-w-3xl mx-auto">
-            Experience the future of learning with our multi-agent AI tutoring system
-          </p>
-          <p className="text-lg text-gray-400 mb-8">
-            Get personalized help from specialized AI tutors in math, science, history, and programming
-          </p>
-          <Link
-            href="/chat"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:shadow-purple-500/50 transition-all hover:scale-105"
-          >
-            Try AI Tutor
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </header>
-
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-100">
-            How It Works
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700 hover:border-purple-500 transition-all hover:shadow-lg hover:shadow-purple-500/20">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-100">Ask Your Question</h3>
-              <p className="text-gray-400">
-                Type your question in any subject. Our Manager Agent analyzes it to understand what you need.
-              </p>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700 hover:border-blue-500 transition-all hover:shadow-lg hover:shadow-blue-500/20">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-100">Smart Routing</h3>
-              <p className="text-gray-400">
-                Your question is instantly routed to the most qualified specialist tutor for your topic.
-              </p>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700 hover:border-green-500 transition-all hover:shadow-lg hover:shadow-green-500/20">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mb-4">
-                <Brain className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-100">Get Expert Help</h3>
-              <p className="text-gray-400">
-                Receive detailed, step-by-step explanations from AI tutors trained specifically in their subjects.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-100">
-            Meet Your AI Tutors
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {agents?.map((agent) => (
-              <div
-                key={agent?.type}
-                className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700 hover:border-opacity-50 transition-all hover:shadow-lg hover:scale-105"
-                style={{
-                  borderColor: agent?.color?.includes('purple') ? '#a855f7' :
-                              agent?.color?.includes('blue') ? '#3b82f6' :
-                              agent?.color?.includes('green') ? '#10b981' :
-                              '#f59e0b',
-                }}
-              >
-                <div className={`w-16 h-16 bg-gradient-to-br ${agent?.color ?? 'from-gray-400 to-gray-600'} rounded-full flex items-center justify-center text-3xl mb-4 mx-auto`}>
-                  {agent?.icon ?? '🤖'}
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white overflow-hidden">
+      {/* Hero Section with Persona Showcase */}
+      <section className="relative px-4 py-20 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-gray-900/10 to-transparent" />
+        
+        <div className="relative mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Hero Text */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center lg:text-left"
+            >
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
+                <div className="relative">
+                  <Brain className="w-12 h-12 text-purple-400" />
+                  <div className="absolute inset-0 bg-purple-500/20 blur-2xl" />
                 </div>
-                <h3 className="text-xl font-semibold text-center mb-2 text-gray-100">
-                  {agent?.name ?? 'Tutor'}
-                </h3>
-                <p className="text-gray-400 text-center text-sm">
-                  {agent?.description ?? 'AI Tutor'}
-                </p>
+                <div>
+                  <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    NeuroLearn
+                  </h1>
+                  <p className="text-sm text-gray-400">Second Brain · Adaptive Tutor</p>
+                </div>
               </div>
+
+              <h2 className="mb-6 text-4xl sm:text-5xl lg:text-6xl font-bold">
+                Learn{" "}
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  10x Faster
+                </span>
+                <br />
+                with AI
+              </h2>
+
+              <p className="mb-8 text-lg text-gray-300 max-w-xl mx-auto lg:mx-0">
+                Chat with legendary minds like Einstein, Newton, and Marie Curie. 
+                Your personal Second Brain with AI-powered lessons, smart notes, 
+                and spaced repetition flashcards.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link
+                  href="/chat"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-purple-500/50"
+                >
+                  Start Learning Free
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/teach"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-700 bg-gray-800/50 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all hover:border-gray-600 hover:bg-gray-800"
+                >
+                  <GraduationCap className="w-5 h-5" />
+                  Try AI Lessons
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right: Featured Persona */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="relative aspect-square max-w-md mx-auto">
+                {/* Persona Avatar */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-900/50 via-pink-900/30 to-blue-900/50 backdrop-blur-xl border border-white/10" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
+                  <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${PERSONAS[selectedPersona].color} flex items-center justify-center text-4xl font-bold text-white mb-4 shadow-2xl`}>
+                    {PERSONAS[selectedPersona].avatar}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2 text-center">{PERSONAS[selectedPersona].name}</h3>
+                  <p className="text-purple-300 mb-2 text-center">{PERSONAS[selectedPersona].title}</p>
+                  <p className="text-sm text-gray-400 mb-4 text-center">{PERSONAS[selectedPersona].subject}</p>
+                  <p className="text-xs text-gray-500 italic text-center max-w-xs">
+                    &ldquo;{PERSONAS[selectedPersona].quote}&rdquo;
+                  </p>
+                </div>
+              </div>
+
+              {/* Persona Selector Dots */}
+              <div className="flex justify-center gap-2 mt-6">
+                {PERSONAS.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedPersona(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === selectedPersona ? "bg-purple-400 w-8" : "bg-gray-600 hover:bg-gray-500"
+                    }`}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet Your Teachers */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-950/5 to-transparent">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              Meet Your{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Legendary Teachers
+              </span>
+            </h2>
+            <p className="text-gray-400 text-lg">Learn from history&apos;s greatest minds, brought to life with AI</p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+            {PERSONAS.map((persona, index) => (
+              <motion.div
+                key={persona.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+                className="group"
+              >
+                <Link href="/chat" className="block">
+                  <div className="relative aspect-square rounded-2xl bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 hover:border-purple-500 transition-all overflow-hidden">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${persona.color} opacity-10 group-hover:opacity-20 transition-opacity`} />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-3">
+                      <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center text-xl font-bold text-white mb-2 shadow-lg group-hover:scale-110 transition-transform`}>
+                        {persona.avatar}
+                      </div>
+                      <p className="text-xs font-semibold text-center text-white">{persona.name.split(" ")[0]}</p>
+                      <p className="text-[10px] text-gray-400 text-center">{persona.subject.split("&")[0].trim()}</p>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
           </div>
-        </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-100">
-            Key Features
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700">
-              <BookOpen className="w-8 h-8 text-purple-500 mb-3" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-100">Multi-Agent System</h3>
-              <p className="text-gray-400">
-                Four specialized AI tutors work together, each expert in their domain, to provide the best possible help.
-              </p>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700">
-              <Code className="w-8 h-8 text-blue-500 mb-3" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-100">Dual-Model Support</h3>
-              <p className="text-gray-400">
-                Choose between GPT-4 and Claude 3.5 Sonnet for responses, or compare both side-by-side.
-              </p>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700">
-              <FlaskConical className="w-8 h-8 text-green-500 mb-3" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-100">Web Search Integration</h3>
-              <p className="text-gray-400">
-                Agents automatically search the web for current information, ensuring up-to-date answers with sources.
-              </p>
-            </div>
-
-            <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-700">
-              <Clock className="w-8 h-8 text-amber-500 mb-3" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-100">Real-Time Streaming</h3>
-              <p className="text-gray-400">
-                See responses appear in real-time with smooth streaming, just like chatting with a human tutor.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="text-center py-12">
-          <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-sm p-8 rounded-2xl border border-purple-500/50">
-            <h2 className="text-3xl font-bold mb-4 text-gray-100">
-              Ready to Learn Smarter?
-            </h2>
-            <p className="text-gray-300 mb-6">
-              Join students who are already experiencing the power of multi-agent AI tutoring
-            </p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.8 }}
+            className="text-center mt-8"
+          >
             <Link
               href="/chat"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:shadow-purple-500/50 transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
             >
-              Start Learning Now
-              <ArrowRight className="w-5 h-5" />
+              <span>Chat with any teacher now</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Feature Grid */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl font-bold mb-4">Everything You Need to Learn Faster</h2>
+            <p className="text-gray-400 text-lg">A complete learning system powered by AI</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <FeatureCard
+              icon="💬"
+              title="Chat with Legends"
+              description="Have conversations with Einstein, Newton, Curie, and more historical geniuses"
+              link="/chat"
+              gradient="from-blue-500 to-cyan-400"
+            />
+            <FeatureCard
+              icon="🎓"
+              title="AI-Generated Lessons"
+              description="Personalized lessons with images, videos, quizzes, and real-world connections"
+              link="/teach"
+              gradient="from-purple-500 to-pink-400"
+            />
+            <FeatureCard
+              icon="🧠"
+              title="Second Brain Notes"
+              description="Smart notes with AI-extracted concepts and automatic knowledge graphs"
+              link="/notes"
+              gradient="from-green-500 to-emerald-400"
+            />
+            <FeatureCard
+              icon="🃏"
+              title="Smart Flashcards"
+              description="Spaced repetition system that adapts to your learning pace and memory"
+              link="/flashcards"
+              gradient="from-orange-500 to-amber-400"
+            />
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent via-purple-950/5 to-transparent">
+        <div className="mx-auto max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl font-bold mb-4">Learn Like You Scroll</h2>
+            <p className="text-gray-400 text-lg">Engaging, fast, and personalized learning experience</p>
+          </motion.div>
+
+          <div className="space-y-8">
+            <StepCard
+              number="1"
+              title="Choose Your Teacher or Topic"
+              description="Select a legendary persona or ask any question. Our AI automatically routes you to the best expert."
+              gradient="from-purple-500 to-pink-500"
+            />
+            <StepCard
+              number="2"
+              title="Get Personalized Content"
+              description="Receive AI-generated lessons with images, videos, mind maps, and real-world connections tailored to your level."
+              gradient="from-blue-500 to-cyan-500"
+            />
+            <StepCard
+              number="3"
+              title="Build Your Second Brain"
+              description="Save notes, generate flashcards, and review with spaced repetition. Your knowledge compounds over time."
+              gradient="from-green-500 to-emerald-500"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="mb-6 text-4xl sm:text-5xl font-bold">
+              Ready to{" "}
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Transform Your Learning?
+              </span>
+            </h2>
+            <p className="mb-8 text-xl text-gray-300">
+              Join thousands of students learning smarter with AI-powered tutors
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/chat"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-10 py-5 text-xl font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-purple-500/50"
+              >
+                Start Learning Free
+                <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-700 bg-gray-800/50 px-10 py-5 text-xl font-semibold text-white backdrop-blur-sm transition-all hover:border-gray-600 hover:bg-gray-800"
+              >
+                <Brain className="w-6 h-6" />
+                View Dashboard
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
+  );
+}
+
+interface FeatureCardProps {
+  icon: string;
+  title: string;
+  description: string;
+  link: string;
+  gradient: string;
+}
+
+function FeatureCard({ icon, title, description, link, gradient }: FeatureCardProps) {
+  return (
+    <Link href={link}>
+      <motion.div
+        whileHover={{ scale: 1.05, y: -5 }}
+        className="group h-full relative overflow-hidden rounded-2xl border border-gray-800 bg-gradient-to-br from-gray-900 to-gray-950 p-6 transition-all hover:border-purple-500/50"
+      >
+        <div className={`mb-4 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-r ${gradient} text-3xl shadow-lg`}>
+          {icon}
+        </div>
+        <h3 className="mb-2 text-lg font-semibold text-white">{title}</h3>
+        <p className="text-sm text-gray-400">{description}</p>
+        <div className="mt-4 inline-flex items-center gap-2 text-purple-400 text-sm group-hover:gap-3 transition-all">
+          <span>Explore</span>
+          <ArrowRight className="w-4 h-4" />
+        </div>
+      </motion.div>
+    </Link>
+  );
+}
+
+interface StepCardProps {
+  number: string;
+  title: string;
+  description: string;
+  gradient: string;
+}
+
+function StepCard({ number, title, description, gradient }: StepCardProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      className="flex gap-6 items-start"
+    >
+      <div className={`flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center text-xl font-bold shadow-lg`}>
+        {number}
+      </div>
+      <div>
+        <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <p className="text-gray-400">{description}</p>
+      </div>
+    </motion.div>
   );
 }

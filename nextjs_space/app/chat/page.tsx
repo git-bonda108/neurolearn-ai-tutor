@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Home, BarChart3 } from 'lucide-react';
+import { Send, Home, BarChart3, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { MessageBubble } from '@/components/message-bubble';
 import { AgentIndicator } from '@/components/agent-indicator';
 import { ModelToggle } from '@/components/model-toggle';
 import { MODEL_TYPES, type ModelType, type AgentType } from '@/lib/agent-types';
 import { motion } from 'framer-motion';
+import { PERSONAS, type Persona } from '@/lib/personas';
 
 interface Message {
   id: string;
@@ -23,6 +24,7 @@ export default function ChatPage() {
   const [currentAgent, setCurrentAgent] = useState<{ type: AgentType; name: string } | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [modelType, setModelType] = useState<ModelType>(MODEL_TYPES.OPENAI);
+  const [selectedPersona, setSelectedPersona] = useState<Persona | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -58,6 +60,7 @@ export default function ChatPage() {
           })),
           sessionId,
           modelType,
+          personaId: selectedPersona?.id,
         }),
       });
 
@@ -165,6 +168,55 @@ export default function ChatPage() {
       </header>
 
       <main className="flex-1 overflow-hidden flex flex-col">
+        {/* Persona Selector - Always visible at top */}
+        <div className="border-b border-gray-700 bg-gray-900/50 backdrop-blur-sm">
+          <div className="max-w-6xl mx-auto px-4 py-4">
+            <div className="flex items-center gap-3 mb-3">
+              <Sparkles className="w-5 h-5 text-purple-400" />
+              <h3 className="text-sm font-semibold text-gray-300">Choose Your Teacher</h3>
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+              {PERSONAS.map((persona) => (
+                <button
+                  key={persona.id}
+                  onClick={() => setSelectedPersona(persona)}
+                  className={`flex-shrink-0 group relative overflow-hidden rounded-xl border transition-all ${
+                    selectedPersona?.id === persona.id
+                      ? 'border-purple-500 bg-purple-900/30 scale-105'
+                      : 'border-gray-700 bg-gray-800/50 hover:border-gray-600 hover:scale-105'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 p-3">
+                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${persona.color} flex items-center justify-center text-lg font-bold text-white shadow-lg`}>
+                      {persona.avatar}
+                    </div>
+                    <div className="text-left">
+                      <p className="text-sm font-semibold text-white">{persona.name}</p>
+                      <p className="text-xs text-gray-400 max-w-[120px] truncate">{persona.title}</p>
+                    </div>
+                  </div>
+                  {selectedPersona?.id === persona.id && (
+                    <motion.div
+                      layoutId="selected-persona"
+                      className="absolute inset-0 border-2 border-purple-400 rounded-xl pointer-events-none"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+            {selectedPersona && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="mt-3 p-3 bg-gray-800/30 rounded-lg border border-gray-700"
+              >
+                <p className="text-xs text-gray-400 italic">&ldquo;{selectedPersona.quote}&rdquo;</p>
+              </motion.div>
+            )}
+          </div>
+        </div>
+
         <div className="flex-1 overflow-y-auto px-4 py-6">
           <div className="max-w-4xl mx-auto">
             {messages?.length === 0 && (
@@ -173,41 +225,42 @@ export default function ChatPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center py-12"
               >
-                <div className="inline-flex items-center gap-2 mb-6">
-                  <div className="text-6xl">🧠</div>
-                </div>
-                <h2 className="text-3xl font-bold text-gray-100 mb-4">
-                  Welcome to NeuroLearn AI Tutor!
-                </h2>
-                <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-                  Ask any question about math, science, history, or programming. Our AI tutors are ready to help!
-                </p>
-                <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-                  <button
-                    onClick={() => setInput('Explain the Pythagorean theorem')}
-                    className="p-4 bg-gray-800/50 hover:bg-gray-700/50 rounded-xl border border-gray-700 hover:border-blue-500 transition text-left"
-                  >
-                    <p className="text-sm text-gray-300">Explain the Pythagorean theorem</p>
-                  </button>
-                  <button
-                    onClick={() => setInput('What is photosynthesis?')}
-                    className="p-4 bg-gray-800/50 hover:bg-gray-700/50 rounded-xl border border-gray-700 hover:border-green-500 transition text-left"
-                  >
-                    <p className="text-sm text-gray-300">What is photosynthesis?</p>
-                  </button>
-                  <button
-                    onClick={() => setInput('Tell me about the American Revolution')}
-                    className="p-4 bg-gray-800/50 hover:bg-gray-700/50 rounded-xl border border-gray-700 hover:border-amber-500 transition text-left"
-                  >
-                    <p className="text-sm text-gray-300">Tell me about the American Revolution</p>
-                  </button>
-                  <button
-                    onClick={() => setInput('How do I write a function in Python?')}
-                    className="p-4 bg-gray-800/50 hover:bg-gray-700/50 rounded-xl border border-gray-700 hover:border-purple-500 transition text-left"
-                  >
-                    <p className="text-sm text-gray-300">How do I write a function in Python?</p>
-                  </button>
-                </div>
+                {!selectedPersona ? (
+                  <>
+                    <div className="inline-flex items-center gap-2 mb-6">
+                      <div className="text-6xl">🧠</div>
+                    </div>
+                    <h2 className="text-3xl font-bold text-gray-100 mb-4">
+                      Welcome to NeuroLearn AI Tutor!
+                    </h2>
+                    <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+                      Choose a legendary teacher above to start learning from history&apos;s greatest minds!
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br ${selectedPersona.color} text-4xl font-bold text-white mb-6 shadow-2xl`}>
+                      {selectedPersona.avatar}
+                    </div>
+                    <h2 className="text-3xl font-bold text-gray-100 mb-4">
+                      Chat with {selectedPersona.name}
+                    </h2>
+                    <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+                      {selectedPersona.teachingStyle}
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                      {selectedPersona.expertise.map((topic, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setInput(`Tell me about ${topic}`)}
+                          className="p-4 bg-gray-800/50 hover:bg-gray-700/50 rounded-xl border border-gray-700 hover:border-purple-500 transition text-left"
+                        >
+                          <p className="text-sm text-gray-300">Tell me about {topic}</p>
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
               </motion.div>
             )}
 
