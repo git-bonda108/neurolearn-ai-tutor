@@ -64,9 +64,9 @@ async function main() {
 
   // Get notes for flashcard association
   const allNotes = await prisma.note.findMany();
-  const physicsNote = allNotes.find(n => n.title.includes('Newton'));
-  const bioNote = allNotes.find(n => n.title.includes('Photosynthesis'));
-  const mathNote = allNotes.find(n => n.title.includes('Quadratic'));
+  const physicsNote = allNotes.find((n: { title: string }) => n.title.includes('Newton'));
+  const bioNote = allNotes.find((n: { title: string }) => n.title.includes('Photosynthesis'));
+  const mathNote = allNotes.find((n: { title: string }) => n.title.includes('Quadratic'));
 
   // Seed Flashcards
   const flashcards = [
