@@ -1,17 +1,3 @@
 {
-  "buildCommand": "cd nextjs_space && prisma generate && next build",
-  "outputDirectory": "nextjs_space/.next",
-  "installCommand": "cd nextjs_space && yarn install",
-  "framework": "nextjs",
-  "functions": {
-    "app/api/teach/generate/route.ts": {
-      "maxDuration": 300
-    },
-    "app/api/chat/route.ts": {
-      "maxDuration": 60
-    },
-    "app/api/images/generate/route.ts": {
-      "maxDuration": 120
-    }
-  }
+  "framework": "nextjs"
 }
