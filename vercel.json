@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "nextjs_space/package.json",
-      "use": "@vercel/next"
-    }
+  "framework": "nextjs",
+  "installCommand": "cd nextjs_space && yarn install",
+  "buildCommand": "cd nextjs_space && yarn build",
+  "outputDirectory": "nextjs_space/.next",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/$1" }
   ]
 }
