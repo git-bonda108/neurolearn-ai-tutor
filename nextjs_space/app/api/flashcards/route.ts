@@ -39,7 +39,7 @@ export async function GET(req: Request) {
     // Filter due flashcards if requested
     if (dueOnly) {
       const now = new Date();
-      const dueFlashcards = flashcards.filter((card) => {
+      const dueFlashcards = flashcards.filter((card: any) => {
         if (card.reviews.length === 0) return true; // Never reviewed
         const lastReview = card.reviews[0];
         return new Date(lastReview.nextReviewAt) <= now;
