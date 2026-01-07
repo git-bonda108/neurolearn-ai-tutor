@@ -99,9 +99,14 @@ export default function TeachPage() {
     try {
       const response = await fetch('/api/teach/topics');
       const data = await response.json();
-      setTopics(data);
+      if (Array.isArray(data)) {
+        setTopics(data);
+      } else {
+        setTopics([]);
+      }
     } catch (error) {
       console.error('Failed to fetch topics:', error);
+      setTopics([]);
     }
   };
 
@@ -109,9 +114,14 @@ export default function TeachPage() {
     try {
       const response = await fetch('/api/students');
       const data = await response.json();
-      setStudents(data);
+      if (Array.isArray(data)) {
+        setStudents(data);
+      } else {
+        setStudents([]);
+      }
     } catch (error) {
       console.error('Failed to fetch students:', error);
+      setStudents([]);
     }
   };
 

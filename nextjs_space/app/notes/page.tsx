@@ -95,10 +95,17 @@ export default function NotesPage() {
     try {
       const response = await fetch('/api/notes');
       const data = await response.json();
-      setNotes(data);
-      setFilteredNotes(data);
+      if (Array.isArray(data)) {
+        setNotes(data);
+        setFilteredNotes(data);
+      } else {
+        setNotes([]);
+        setFilteredNotes([]);
+      }
     } catch (error) {
       console.error('Failed to fetch notes:', error);
+      setNotes([]);
+      setFilteredNotes([]);
     } finally {
       setIsLoading(false);
     }

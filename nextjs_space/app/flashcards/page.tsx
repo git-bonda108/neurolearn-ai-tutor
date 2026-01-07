@@ -78,10 +78,17 @@ export default function FlashcardsPage() {
       const url = showDueOnly ? '/api/flashcards?dueOnly=true' : '/api/flashcards';
       const response = await fetch(url);
       const data = await response.json();
-      setFlashcards(data);
-      setFilteredCards(data);
+      if (Array.isArray(data)) {
+        setFlashcards(data);
+        setFilteredCards(data);
+      } else {
+        setFlashcards([]);
+        setFilteredCards([]);
+      }
     } catch (error) {
       console.error('Failed to fetch flashcards:', error);
+      setFlashcards([]);
+      setFilteredCards([]);
     } finally {
       setIsLoading(false);
     }
