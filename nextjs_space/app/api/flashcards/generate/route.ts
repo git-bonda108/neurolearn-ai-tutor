@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         },
         {
           role: 'user',
-          content: `Title: ${note.title}\n\nContent: ${note.content}\n\nConcepts: ${note.concepts.map((c) => c.name).join(', ')}`,
+          content: `Title: ${note.title}\n\nContent: ${note.content}\n\nConcepts: ${note.concepts.map((c: { name: string }) => c.name).join(', ')}`,
         },
       ],
       temperature: 0.5,
