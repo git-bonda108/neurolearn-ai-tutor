@@ -5,11 +5,5 @@
       "src": "nextjs_space/package.json",
       "use": "@vercel/next"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/nextjs_space/$1"
-    }
   ]
 }
