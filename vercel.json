@@ -1,10 +1,7 @@
 {
   "version": 2,
-  "framework": "nextjs",
-  "installCommand": "cd nextjs_space && yarn install",
-  "buildCommand": "cd nextjs_space && yarn build",
+  "buildCommand": "cd nextjs_space && yarn install && yarn build",
   "outputDirectory": "nextjs_space/.next",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/$1" }
-  ]
+  "installCommand": "echo 'skipping root install'",
+  "framework": "nextjs"
 }

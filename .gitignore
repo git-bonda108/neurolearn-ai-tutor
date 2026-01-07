@@ -18,3 +18,4 @@ out
 .deploy
 .logs
 *.tsbuildinfo
+nextjs_space/.env
