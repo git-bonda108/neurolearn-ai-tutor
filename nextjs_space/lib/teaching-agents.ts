@@ -6,7 +6,7 @@ import { searchWeb } from './tavily-search';
 import { generateEducationalImage } from './image-generator';
 import { ContextPack, GradeLevelContent } from './context-packs';
 
-const openai = new OpenAI({
+const getOpenAI = () => new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
@@ -146,7 +146,7 @@ Format as JSON array:
 Make it engaging, clear, and memorable!`;
 
   try {
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
       model: 'gpt-4',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.7,
@@ -285,7 +285,7 @@ Make questions engaging and test real understanding!`;
 
   let quiz: QuizQuestion[] = [];
   try {
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAI().chat.completions.create({
       model: 'gpt-4',
       messages: [{ role: 'user', content: quizPrompt }],
       temperature: 0.7,

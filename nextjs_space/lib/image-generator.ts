@@ -7,7 +7,7 @@
 
 import OpenAI from 'openai';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const getOpenAI = () => new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 interface ImageResult {
   url: string;
@@ -19,7 +19,7 @@ interface ImageResult {
 async function generateWithDALLE(prompt: string): Promise<string | null> {
   try {
     console.log('[Tier 1] Attempting DALL-E generation...');
-    const response = await openai.images.generate({
+    const response = await getOpenAI().images.generate({
       model: 'dall-e-3',
       prompt: `Educational illustration: ${prompt}. High quality, professional, suitable for learning.`,
       n: 1,

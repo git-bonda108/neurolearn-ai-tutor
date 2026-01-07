@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
+const getOpenAI = () => new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
@@ -80,7 +80,7 @@ export async function PUT(
       });
 
       // Extract new concepts
-      const completion = await openai.chat.completions.create({
+      const completion = await getOpenAI().chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
           {
